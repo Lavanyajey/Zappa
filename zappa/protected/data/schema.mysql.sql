@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2010 at 12:40 PM
+-- Generation Time: Oct 30, 2010 at 01:13 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.2
 
@@ -20,15 +20,18 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE `tbl_calls` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tbl_calls`
 --
 
+INSERT INTO `tbl_calls` VALUES(1, 'Wake up bitch! It''s 7:30!');
+INSERT INTO `tbl_calls` VALUES(2, 'Wake up bitch! It''s 7:30!');
+INSERT INTO `tbl_calls` VALUES(3, 'Wake up bitch! It''s 7:30!');
 
 -- --------------------------------------------------------
 
@@ -37,19 +40,19 @@ CREATE TABLE `tbl_calls` (
 --
 
 CREATE TABLE `tbl_job_queue` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `call_id` int(10) NOT NULL,
   `phone` int(20) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `call_id` (`call_id`),
   KEY `call_id_2` (`call_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tbl_job_queue`
 --
 
+INSERT INTO `tbl_job_queue` VALUES(5, 3, 2147483647, '2010-10-30 13:10:55');
 
 -- --------------------------------------------------------
 
@@ -171,14 +174,4 @@ CREATE TABLE `tbl_users` (
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` VALUES(3, 'fe01ce2a7fbac8fafaed7c982a04e229', 'me@sebastianborggrewe.de', '7c4d84dff1b62d792a9181899bf51a0d', 1268354813, 1288437918, 0, 1, 27, 0);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tbl_job_queue`
---
-ALTER TABLE `tbl_job_queue`
-  ADD CONSTRAINT `job_queue_ibfk_1` FOREIGN KEY (`call_id`) REFERENCES `tbl_job_queue` (`call_id`) ON DELETE CASCADE;
+INSERT INTO `tbl_users` VALUES(3, 'fe01ce2a7fbac8fafaed7c982a04e229', 'me@sebastianborggrewe.de', '7c4d84dff1b62d792a9181899bf51a0d', 1268354813, 1288440165, 0, 1, 27, 0);

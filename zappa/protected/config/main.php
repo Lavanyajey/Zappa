@@ -90,7 +90,7 @@ $config = array(
 				'login'=>array('/'),
 				'logout'=>array('/logout'),
 				'profile'=>array('/user/profile')
-	        ),
+                        ),
 		),
 		'gii' => array(
 			'class'=>'system.gii.GiiModule',

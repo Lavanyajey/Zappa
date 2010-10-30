@@ -52,7 +52,7 @@ public class DatabaseSepaker {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost/zappa","root", "password");
+			con=DriverManager.getConnection("jdbc:mysql://localhost/latentflip_zappa","latentflip_zappa", "zappazappa123");
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from tbl_job_queue where UNIX_TIMESTAMP(time) < " + (thetime + 300));
 			

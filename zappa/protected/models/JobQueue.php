@@ -15,6 +15,8 @@
  */
 class JobQueue extends CActiveRecord
 {
+	public $_message = '';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return JobQueue the static model class
@@ -40,7 +42,7 @@ class JobQueue extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('phone', 'required'),
+			array('phone, _message', 'required'),
 			array('phone', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

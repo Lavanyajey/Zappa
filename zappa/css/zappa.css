@@ -2,21 +2,12 @@
 http://jqueryui.com/themeroller/#ffDefault=Segoe+UI%2C+Helvetica%2C+Arial%2C+sans-serif&fwDefault=normal&fsDefault=12px&cornerRadius=2px&bgColorHeader=dddddd&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=50&borderColorHeader=dddddd&fcHeader=444444&iconColorHeader=333333&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=dddddd&fcContent=444444&iconColorContent=333333&bgColorDefault=f5f5f5&bgTextureDefault=04_highlight_hard.png&bgImgOpacityDefault=100&borderColorDefault=dddddd&fcDefault=333333&iconColorDefault=666666&bgColorHover=f0f0f0&bgTextureHover=03_highlight_soft.png&bgImgOpacityHover=100&borderColorHover=cccccc&fcHover=000000&iconColorHover=333333&bgColorActive=cccccc&bgTextureActive=05_inset_soft.png&bgImgOpacityActive=65&borderColorActive=dddddd&fcActive=000&iconColorActive=454545&bgColorHighlight=ffffff&bgTextureHighlight=04_highlight_hard.png&bgImgOpacityHighlight=55&borderColorHighlight=cccccc&fcHighlight=444444&iconColorHighlight=333333&bgColorError=ffffff&bgTextureError=01_flat.png&bgImgOpacityError=55&borderColorError=ff0084&fcError=222222&iconColorError=ff0084&bgColorOverlay=eeeeee&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=80&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=60&thicknessShadow=4px&offsetTopShadow=-4px&offsetLeftShadow=-4px&cornerRadiusShadow=0px
 */
 
-/*
-THEME
-FF6666
-38828C
-FFFFE5
-666161
-FFCC47
-*/
-
 /*common*/
 body { font-family:"Segoe UI", "Trebuchet MS", Arial, sans-serif; font-size:12px; margin:0; padding:0; /*background-color:#f7f7f7;*/ }
 html { /*background-color:#f7f7f7;*/ margin:0; padding:0; }
-h1, h2, h3, h4 { font-family:'Yanone Kaffeesatz'; font-weight:normal; }
-h1 { font-size: 24px; }
-h2 { font-size: 20px; }
+h1, h2, h3, h4 { font-family:'Josefin Sans Std Light'; font-weight:normal; margin-bottom:5px; }
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
 .funky { border-top:18px solid #38828C; background-color:#38828C; color:white; text-align:right; }
 .center { text-align:center; }
 .gray { color:#aaa; }
@@ -24,8 +15,8 @@ h2 { font-size: 20px; }
 div.info { border:6px solid #eee; color: #777; padding:10px 20px 0 20px; }
 div.info button { font-size:9px; }
 .flashMessage { margin-left:auto; margin-right:auto; width:80%; padding:4px 0 6px 0; margin:8px; background-color:#8AED72; font-size:14px; font-weight:bold; text-align:center; }
-
 .heart { font-size:17px; }
+.clearfloats { clear:both; }
 
 table { width:auto; }
 th, td { border:none; }
@@ -66,15 +57,11 @@ div#copyright { margin-bottom:10px; }
 .descriptionContainer p { font-size:13px; line-height:200%; text-align:justify; margin:20px; padding:30px 20px; }
 #introContainer { margin-bottom:70px; padding: .2em; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; border: 1px solid #dddddd; }
 #introContainer .bg { padding:10px; background:url('../images/bg_gray.jpg') center center; }
-#secondaryContainer .left { width: 560px; border-right:1px solid #ddd; }
-
 /*secondary layout*/
+#secondaryContainer .left { width: 560px; border-right:1px solid #ddd; }
 #secondaryContainer { padding: .2em; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; border: 1px solid #dddddd; }
-#secondaryContainer .bg { padding:10px; background:url('../images/bg_gray.jpg') center center; }
+#secondaryContainer .bg { padding:10px 20px; background:url('../images/bg_gray.jpg') center center; }
 #secondaryContainer .form .fields { width:200px; margin:auto; }
-
-#activitiesContainer { padding: .2em; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; border: 1px solid #dddddd; }
-#activitiesContainer .bg { padding:10px; background:url('../images/bg_gray.jpg') center center; }
 
 /*login form*/
 #loginForm label { color:#888; font-size:12px; font-weight:normal; margin-bottom:0; padding-bottom:0; }
@@ -83,82 +70,9 @@ div#copyright { margin-bottom:10px; }
 #loginForm .submit { font-size:16px; float:left; }
 #loginForm .lost { margin:24px 24px 24px 132px; }
 
-
-/*ACTIVITIES*/
-/* Add activity section */
-div#addActivityContainer { margin:auto; width:764px; height:70px; padding-left:20px; border-bottom:1px solid #CCC;}
-div#addActivityContainer input { margin:0; font-size:14px; font-family: "Segoe UI", sans-serif; }
-div#addActivityContainer .field { float:left; margin:6px; }
-div#addActivityContainer input#Activity_title { width:300px; }
-div#addActivityContainer input#Activity_start_time { width:130px; text-align:center; }
-div#addActivityContainer .prev { margin-top:16px; padding-top:16px; margin-left:8px; }
-div#addActivityContainer input.submit { font-size:12px; margin-top:17px; margin-left:4px; padding:5px 10px; }
-
-/* Activity List */
-div#activities { min-height:50px; margin-top:20px; }
-div#activityListContainer { width:800px; margin:auto; /*background-color:#FFFFE5;*/ padding:10px 20px; -moz-border-radius-topleft: 16px; -webkit-border-top-left-radius: 16px; -moz-border-radius-bottomright:16px; -webkit-border-bottom-right-radius:16px; }
-div#activityListContainer .item { margin:5px; position:relative; /*background-color:#EAF2DC; border:2px solid #EAF2DC;*/ }
-div#activityListContainer .item {-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3); padding: .2em; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; border: 1px solid #dddddd; }
-div#activityListContainer .item .bg { background:rgba(0,0,0,0.08); padding:7px 10px 6px 10px; height:23px; }
-div#activityListContainer .item .options { float:right; margin-right:-8px; margin-top:-4px; height: 29px; width:18px; }
-div#activityListContainer .title { display:block; float:left; width:330px; font-size:14px; margin-top:2px; margin-left:20px; margin-right:30px; text-decoration:none; height:24px; }
-div#activityListContainer .title a { color:#333; text-decoration:none; }
-div#activityListContainer .tags { display:block; font-style:italic; color:#777; height:10px; width:180px; float:left; margin-top:3px; }
-div#activityListContainer .description { float:left; margin-top:4px; }
-div#activityListContainer .description .icon { display:block; width:18px; height:18px; background:url("custom-theme/images/ui-icons_666666_256x240.png") -128px -96px; }
-div#activityListContainer .time { display:block; width:76px; float:left; color:#444; margin-top:3px; }
-div#activityListContainer .duration { display:block; font-family:"Trebuchet MS"; font-size:18px; position:absolute; margin-left:704px; }
-div#activityListContainer #activities .current { border:2px solid #FFCC47; }
-div#activityListContainer .stopContainer { margin-left:566px; margin-top:14px; }
-div#activityListContainer .stopContainer input { text-align:center; color:#bbb; float:left; margin-right:10px; }
-div#activityListContainer .stopContainer input.focusField { color:#333; }
-div#activityListContainer .daypic { width:180px; height:50px; position:absolute; margin-top:-50px; background: url("../images/chinchilla7_10.png"); }
-div#activityListContainer .day { font-family:'Yanone Kaffeesatz'; font-size:36px; }
-div#activityListContainer .empty { display:block; margin:30px; font-size:18px; }
-div#activityListContainer .datepickers { position:absolute; margin-left:604px; margin-top:30px; }
-div#activityListContainer .datepickers .prev { outline:none; }
-div#activityListContainer #datepicker { -webkit-border-radius:0; -moz-border-radius:0; width:80px; height:16px; }
-div#activityListContainer .datepickers .next { outline:none; }
-div#activityListContainer .datepickers .optionsMenu { margin-left:110px; margin-top:0px; width:138px;}
-div#activityListContainer .datepickers .optionsMenu li a { width:138px; }
-div#activityListContainer #activities .optionsMenu { margin-left:720px; margin-top:26px; }
-div#activityListContainer #activities .optionsMenu li a { width:90px; }
-
-/*Edit acvitity*/
-
-div.editContainer label { float:left; display:inline; width:110px; text-align:right; }
-div.editContainer .prev label { float:left; text-align:left; width:210px; margin-left: 124px; }
-div.editContainer .prev input { margin: 10px 0px 0px 94px; position:absolute; }
-div.editContainer input[type="submit"] { margin-left: 170px; }
-
-/* Timeline */
-div#timelineContainer { width: 810px; padding: 0 10px; margin: auto; margin-top: 30px; height: 50px; margin-bottom: 10px; font-size: 10px; border-bottom: 1px dotted #ccc; }
-
-/* Summary */
-div#summaryContainer {  margin:40px 0 30px 100px; font-size:14px; color:#888;}
-
-.bottom { height:14px; margin:10px 10px 4px 10px; border-top:1px solid #ccc; padding:20px 10px 4px 10px; }
-.timezone { color:#999; }
-.help { float:right; margin-top:-23px; color:#999 !important; font-size:19px; font-family: 'Yanone Kaffeesatz'; }
-
-/*NOTIFICATION*/
-#notification-container {  position:fixed; width:100%; bottom:60px; text-align:center;/*display:block; position:fixed; width:100%; bottom:40px; border:1px dotted blue; margin:auto; text-align:center; height:100px;*/ }
-.notification-item-wrapper {z-index:50000; margin:0 auto; max-width:515px; border:5px solid #FFF; font-size:20px; text-align:left; background: none repeat scroll 0 0 rgba(30, 30, 30, 0.8); color:#fff; padding:6px 24px; -moz-border-radius: 10px; -webkit-border-radius: 10px; -webkit-box-shadow: 0 0 6px #333; -moz-box-shadow: 0 0 6px #333; margin-top:8px;}
-.notification-close { background-color:#ccc; float:right; height:16px; margin-right:-16px; width:16px; }
-.notification-item-wrapper p { margin: 0; }
-
 /*RANDOM*/
 /*error messages destroy layout otherwise*/
 div.form .errorMessage { position:absolute; }
-
-/*Overview gridview*/
-#overview td { text-align:center; }
-.section { margin:26px 0; padding:6px; border-top:1px solid #ccc;}
-#OverviewForm_keywords, #OverviewForm_tags { width:274px; }
-#OverviewFilter .to label { width:20px; }
-#OverviewFilter input[type="submit"] { margin-top:0; margin-left:64px; }
-#OverviewFilter { margin-bottom:20px; }
-
 
 .awesomeButton {
 	background: #222 url(../images/overlay-button.png) repeat-x;
@@ -188,5 +102,32 @@ div.form .errorMessage { position:absolute; }
 #label_showpassword { position:absolute; margin-left:216px; margin-top:-22px; }
 #showpassword { position:absolute; margin-top:8px; margin-left:6px; }
 
-#YumUser_timezone_id { width:400px; }
-.registration #YumUser_timezone_id { width:188px; }
+
+
+
+#createAlert {
+	width:300px;
+	float:left;
+	padding:20px;
+}
+#alertSchedule {
+	width:400px;
+	float:left;
+	padding:20px;
+}
+#alertSchedule .list {
+	
+}
+
+#createAlert input[type="text"] {
+	font-size:24px;
+	width:220px;
+	padding:10px 5px;
+}
+#createAlert input[type="submit"] {
+	font-size:24px;
+	width:232px;
+}
+#JobQueue_phone { text-align:center; }
+#JobQueue_time { text-align:center; }
+#JobQueue__message { width: 224px; }

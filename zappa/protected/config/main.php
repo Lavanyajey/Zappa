@@ -5,7 +5,7 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-$config = array(
+return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Zappa',
 
@@ -23,12 +23,6 @@ $config = array(
 	),
 
 	'defaultController'=>'site/intro',
-	
-	'modules'=>array(
-		'user'=>array(
-            'returnUrl' => array('/')
-        )
-	),
 
 	// application components
 	'components'=>array(
@@ -52,9 +46,8 @@ $config = array(
 			//'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
-				'user/<action:\w+>'=>'user/user/<action>',
-				'login'=>'user/user/login',
-				'logout'=>'user/user/logout'
+				//'r=user/<action:\w+>'=>'user/user/<action>',
+				//'logout'=>'user/user/logout'
 				
 				/*
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
@@ -72,25 +65,43 @@ $config = array(
 		'clientScript'=>array(
 		    'class'=>'ClientScript',
 		),
+		'log' => array(
+			'class'=>'CLogRouter',
+			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',                  
+				),
+				// uncomment the following to show log messages on web pages
+				array(
+					'class'=>'CWebLogRoute',
+					'categories'=>'application, system.db.*'
+				),
+				array(
+					'class' => 'ext.shiki.firePHPLogRoute.ShikiFirePHPLogRoute',
+					'fbPath' => 'ext.shiki.firePHPLogRoute.FirePHPCore.fb',
+					'categories'=>'system.db.*, application'
+				)
+			)
+		)
 	),
 	
 	'modules'=>array(
 		'user' => array(
 			'layout' => 'application.views.layouts.main',
-			//'adminLayout' => 'application.views.layouts._simple',
 			'enableEmailActivation' => false,
 			'allowInactiveAcctLogin' => true,
 			'allowCaptcha' => false,
 			'_urls' => array(
-				'registration'=>array('user/registration'),
-				'recovery'=>array('user/recovery'),
+				'registration'=>array('user/user/registration'),
+				'recovery'=>array('user/user/recovery'),
 				'return'=>array('/'),
 				'afterActivation'=>array('/'),
 				'returnLogout'=>array('/'),
 				'login'=>array('/'),
-				'logout'=>array('/logout'),
-				'profile'=>array('/user/profile')
-                        ),
+				'logout'=>array('user/user/logout'),
+				'profile'=>array('user/user/profile')
+            ),
 		),
 		'gii' => array(
 			'class'=>'system.gii.GiiModule',
@@ -103,27 +114,3 @@ $config = array(
 	// using Yii::app()->params['paramName']
 	'params'=>require(dirname(__FILE__).'/params.php'),
 );
-
-//debugging
-$config['components']['log'] = array(
-		'class'=>'CLogRouter',
-		'routes'=>array(
-			array(
-				'class'=>'CFileLogRoute',
-				'levels'=>'error, warning',                  
-			),
-			// uncomment the following to show log messages on web pages
-			/*
-			array(
-				'class'=>'CWebLogRoute',
-				'categories'=>'application, system.db.*'
-      ),*/
-			array(
-				'class' => 'ext.shiki.firePHPLogRoute.ShikiFirePHPLogRoute',
-				'fbPath' => 'ext.shiki.firePHPLogRoute.FirePHPCore.fb',
-				'categories'=>'system.db.*, application'
-			)
-		)
-	);
-
-return $config;

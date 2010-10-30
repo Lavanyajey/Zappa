@@ -27,16 +27,12 @@ class CallController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','get'),
+				'actions'=>array('get'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('index', 'view', 'create','update', 'delete'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -52,33 +48,6 @@ class CallController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
-	}
-
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreate()
-	{
-		$jobQueueModel = new JobQueue;
-                $callModel = new Calls;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['JobQueue']))
-		{
-			$jobQueueModel->attributes=$_POST['JobQueue'];
-			$callModel->message = $jobQueueModel->_message;
-			$callModel->save();
-			$jobQueueModel->call_id = $callModel->id;
-			if($jobQueueModel->save())
-				$this->redirect(array('view','id'=>$jobQueueModel->id));
-		}
-
-		$this->render('create',array(
-			'model'=>$jobQueueModel,
 		));
 	}
 
@@ -113,17 +82,20 @@ class CallController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
+		//if(Yii::app()->request->isPostRequest)
+		//{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+			$jobQueueModel = $this->loadModel($id);
+			$jobQueueModel->call->delete();
+			$jobQueueModel->delete();
+			
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+		//}
+		//else
+		//	throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -131,27 +103,60 @@ class CallController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('JobQueue');
+		$criteria = new CDbCriteria(array(
+			'order' => 't.time ASC',
+            'limit' => -1,
+			'with' => 'call',
+			'condition' => 'call.status=0'
+        ));
+		$criteria->compare('call.user_id', Yii::app()->user->id, true);
+        $dataProvider = new CActiveDataProvider('JobQueue', array(
+			'criteria'=>$criteria,
+			'pagination'=>false,
+        ));
+		
+		$jobQueueModel = new JobQueue;
+        $callModel = new Calls;
+		
+		if(isset($_POST['JobQueue'])) {
+			$jobQueueModel->attributes=$_POST['JobQueue'];
+			if ($jobQueueModel->validate()) {
+				$callModel->message = $jobQueueModel->_message;
+				$callModel->user_id = Yii::app()->user->id;
+				if ($callModel->validate()) {
+					$callModel->save();
+					$jobQueueModel->call_id = $callModel->id;
+					if ($jobQueueModel->save()) {
+						$this->redirect(array('index'));
+					} else {
+						throw new CHttpException(400,'Oops. Fail whale.');
+					}
+				}
+			}
+		} else {
+			$jobQueueModel->phone = Yii::app()->user->getInstance()->phone;
+		}
+		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'model'=>$jobQueueModel,
 		));
 	}
 
         /**
          * Get a call in XML Format
          */
-        public function actionGet($id)
-        {
-          $model = Calls::model()->findByPk((int)$id);
-          $message = $model->message;
-          Yii::log($message);
-
-          $this->renderPartial('get',array(
-			'message'=>$message,
-          ));
-
-          //Calls::model()->findByPk((int)$id)->delete();
-        }
+    public function actionGet($id)
+	{
+		$model = Calls::model()->findByPk((int)$id);
+		$message = $model->message;
+		$model->status=1;
+		$model->save();
+	
+		$this->renderPartial('get',array(
+		  'message'=>$message,
+		));
+    }
 
 	/**
 	 * Manages all models.

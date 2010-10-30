@@ -66,9 +66,10 @@ class YumUser extends YumActiveRecord
 			array('status', 'in', 'range'=>array(0,1,-1)),
 			array('superuser', 'in', 'range'=>array(0,1)),
 			array('createtime, lastvisit, superuser, status', 'required'),
-			array('password', 'required', 'on'=>array('insert')),
+			array('password', 'required', 'on'=>array('insert', 'edit', 'admin', 'registration')),
 			array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
-			array('timezone_id', 'required'),
+			//array('timezone_id', 'required'),
+			array('phone', 'required', 'on'=>array('insert', 'edit', 'admin', 'registration')),
 			array('timezone_id', 'numerical', 'min'=>1, 'max'=>75, 'on'=>'edit, admin, registration'),
 			//array('new_email', 'safe', 'on'=>'edit'),
 		);
@@ -80,12 +81,13 @@ class YumUser extends YumActiveRecord
 		);
 	}
 
-	public function register($email=null, $password=null, $timezone_id=null) {
+	public function register($email=null, $password=null, $phone=null) {
 		#this function can be used external to
-		if($email!==null && $password!==null && $timezone_id!==null) {
+		if($email!==null && $password!==null && $phone!==null) {
 			$this->email = $email;
 			$this->password = $this->encrypt($password);
-			$this->timezone_id = $timezone_id;
+			$this->timezone_id = 27; //London
+			$this->phone = $phone;
 		}
 		$this->activationKey = $this->generateActivationKey(false,$password);
 		$this->createtime = time();
@@ -146,6 +148,7 @@ class YumUser extends YumActiveRecord
 			'superuser' => Yii::t("UserModule.user", "Superuser"),
 			'status' => Yii::t("UserModule.user", "Status"),
 			'timezone_id' => Yii::t("UserModule.user", "Timezone"),
+			'phone' => Yii::t("UserModule.user", "Phone Number"),
 		);
 	}
 	

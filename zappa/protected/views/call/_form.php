@@ -10,19 +10,16 @@
 	<div class="row">
 		<?php echo $form->label($model,'phone'); ?>
 		<?php echo $form->textField($model,'phone'); ?>
-		<?php echo $form->error($model,'phone'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'time'); ?>
 		<?php echo $form->textField($model,'time'); ?>
-		<?php echo $form->error($model,'time'); ?>
 	</div>
 	
 	<div class="row">
 		<?php echo $form->label($model,'_message'); ?>
-		<?php echo $form->textField($model,'_message'); ?>
-		<?php echo $form->error($model,'_message'); ?>
+		<?php echo $form->textArea($model,'_message',array('rows'=>8)); ?>
 	</div>
 
 	<div class="row buttons">

@@ -6,3 +6,4 @@ zappa/protected/runtime
 zappa/protected/runtime/*
 zappa/assets
 zappa/assets/*
+*.komodoproject

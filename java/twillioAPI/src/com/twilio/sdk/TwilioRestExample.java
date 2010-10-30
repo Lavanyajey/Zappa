@@ -110,7 +110,7 @@ public class TwilioRestExample {
      * @param to the phone number to be called
      * @param url the URL to execute when the called party answers
      */
-    private static void makeCallExample(TwilioRestClient client, String from, String to, String url ){
+    public static void makeCallExample(TwilioRestClient client, String from, String to, String url ){
 
         //build map of post parameters 
         Map<String,String> params = new HashMap<String,String>();

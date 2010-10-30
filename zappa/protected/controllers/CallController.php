@@ -27,7 +27,7 @@ class CallController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','get'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -139,6 +139,20 @@ class CallController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+        /**
+         * Get a call in XML Format
+         */
+        public function actionGet($id)
+        {
+          $model = Calls::model()->findByPk((int)$id);;
+          $message = $model->message;
+          Yii::log($message);
+
+          $this->render('get',array(
+			'message'=>$message,
+          ));
+        }
 
 	/**
 	 * Manages all models.

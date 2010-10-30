@@ -25,7 +25,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `calls`
 --
 
-CREATE TABLE IF NOT EXISTS `calls` (
+CREATE TABLE IF NOT EXISTS `tbl_calls` (
   `id` int(10) NOT NULL,
   `phone` int(20) NOT NULL,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `calls` (
 -- Table structure for table `job_queue`
 --
 
-CREATE TABLE IF NOT EXISTS `job_queue` (
+CREATE TABLE IF NOT EXISTS `tbl_job_queue` (
   `id` int(10) NOT NULL,
   `call_id` int(10) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -188,5 +188,5 @@ INSERT INTO `tbl_users` (`id`, `password`, `email`, `activationKey`, `createtime
 --
 -- Constraints for table `job_queue`
 --
-ALTER TABLE `job_queue`
-  ADD CONSTRAINT `job_queue_ibfk_1` FOREIGN KEY (`call_id`) REFERENCES `job_queue` (`call_id`) ON DELETE CASCADE;
+ALTER TABLE `tbl_job_queue`
+  ADD CONSTRAINT `job_queue_ibfk_1` FOREIGN KEY (`call_id`) REFERENCES `tbl_job_queue` (`call_id`) ON DELETE CASCADE;

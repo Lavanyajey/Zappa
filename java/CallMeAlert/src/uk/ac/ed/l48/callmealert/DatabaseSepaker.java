@@ -8,10 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.zappa.sdk.*;
-
-
-public class DatabaseSepaker {
+class DatabaseSepaker {
 
 	public static void main(String args[]) {
 		DatabaseSepaker ds = new DatabaseSepaker();

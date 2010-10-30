@@ -2,7 +2,9 @@ package com.zappa.sdk;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.twilio.sdk.*;
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.TwilioRestResponse;
 
 public class PhoneCaller 
 {
@@ -27,7 +29,7 @@ public class PhoneCaller
 	
 	public static void main(String args[])
 	{
-		TwilioRestExample e = new TwilioRestExample();
+		
 		PhoneCaller caller = new PhoneCaller();
 		caller.callUrl("+447816816158", 1);
 		
@@ -36,7 +38,8 @@ public class PhoneCaller
 	public void callUrl(String number, Integer messageId)
 	{
 		String urlAddress = String.format("http://zappa.latentflip.com/?r=call/get/id/%d", messageId);
-		System.out.println(urlAddress);
+		System.out.println("Message url: " + urlAddress);
+		System.out.println("Telephone number to call: " + number);
 		makeCall(this.client, this.CallerID, number, urlAddress);
 	}
 	

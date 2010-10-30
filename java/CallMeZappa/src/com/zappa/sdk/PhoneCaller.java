@@ -37,7 +37,7 @@ public class PhoneCaller
 	{
 		String urlAddress = String.format("http://zappa.latentflip.com/?r=call/get/id/%d", messageId);
 		System.out.println(urlAddress);
-		makeCall(this.client, this.CallerID, number, urlAddress);
+		//makeCall(this.client, this.CallerID, number, urlAddress);
 	}
 	
     public static void makeCall(TwilioRestClient client, String from, String to, String url ){

@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `tbl_timezone` (
   `php` varchar(30) NOT NULL,
   `label` varchar(70) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=76 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_timezone`
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   UNIQUE KEY `email` (`email`),
   KEY `status` (`status`),
   KEY `superuser` (`superuser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19;
 
 --
 -- Dumping data for table `tbl_users`

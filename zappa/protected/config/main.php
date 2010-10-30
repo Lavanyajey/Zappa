@@ -5,7 +5,7 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-return array(
+$config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Zappa',
 
@@ -14,18 +14,21 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
+		'application.modules.user.*',
+		'application.modules.user.core.*',
+		'application.modules.user.models.*',
 		'application.models.*',
 		'application.components.*',
+		'application.widgets.*'
+        //'application.extensions.ManyToManyBehavior',        
 	),
 
+	'defaultController'=>'site/intro',
+	
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		/*
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
-		),
-		*/
+		'user'=>array(
+            'returnUrl' => array('/activities')
+        )
 	),
 
 	// application components
@@ -33,56 +36,90 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+			'loginUrl' => '/',
+            'class' => 'application.modules.user.components.YumWebUser'
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
-		*/
-		/*'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-    ),*/
-		// uncomment the following to use a MySQL database
-		
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=latentflip_zappa',
-			'emulatePrepare' => true,
 			'username' => 'latentflip_zappa',
 			'password' => 'zappazappa123',
+			'emulatePrepare' => true,
 			'charset' => 'utf8',
+			'tablePrefix' => 'tbl_',
+			'enableProfiling'=>true,
+			'enableParamLogging'=>true
 		),
-		
-		'errorHandler'=>array(
-			// use 'site/error' action to display errors
-            'errorAction'=>'site/error',
+		'urlManager'=>array(
+			'urlFormat'=>'path',
+			'showScriptName'=>false,
+			'rules'=>array(
+				'post/<id:\d+>/<title:.*?>'=>'post/view',
+				'posts/<tag:.*?>'=>'post/index',
+				'activities'=>'activity/index',
+				'activities/statistics'=>'activity/statistics',
+				'user/<action:\w+>'=>'user/user/<action>',
+				'login'=>'user/user/login',
+				'logout'=>'user/user/logout'
+            ),
         ),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
-			),
+		'errorHandler'=>array(
+			'errorAction'=>'site/error',
 		),
+		'clientScript'=>array(
+		    'class'=>'ClientScript',
+		),
+	),
+	
+	'modules'=>array(
+		'user' => array(
+			'layout' => 'application.views.layouts.main',
+			//'adminLayout' => 'application.views.layouts._simple',
+			'enableEmailActivation' => false,
+			'allowInactiveAcctLogin' => true,
+			'allowCaptcha' => false,
+			'_urls' => array(
+				'registration'=>array('user/registration'),
+				'recovery'=>array('user/recovery'),
+				'return'=>array('/activities'),
+				'afterActivation'=>array('/activities'),
+				'returnLogout'=>array('/'),
+				'login'=>array('/'),
+				'logout'=>array('/logout'),
+				'profile'=>array('/user/profile')
+	        ),
+		),
+		'gii'=>array(
+			'class'=>'system.gii.GiiModule',
+			'password'=>'enter',
+		)
 	),
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
-	),
+	'params'=>require(dirname(__FILE__).'/params.php'),
 );
+
+//debugging
+$config['components']['log'] = array(
+		'class'=>'CLogRouter',
+		'routes'=>array(
+			array(
+				'class'=>'CFileLogRoute',
+				'levels'=>'error, warning',                  
+			),
+			// uncomment the following to show log messages on web pages
+			/*
+			array(
+				'class'=>'CWebLogRoute',
+				'categories'=>'application, system.db.*'
+			),
+			*/
+			array(
+				'class' => 'ext.shiki.firePHPLogRoute.ShikiFirePHPLogRoute',
+				'fbPath' => 'ext.shiki.firePHPLogRoute.FirePHPCore.fb',
+				'categories'=>'system.db.*, application'
+			)
+		)
+	);
+
+return $config;

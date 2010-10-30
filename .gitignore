@@ -4,4 +4,7 @@ zappa/protected/runtime
 zappa/protected/runtime/*
 zappa/assets
 zappa/assets/*
+java/*/*.class
+*.swp
+java/.metadata
 *.komodoproject

@@ -58,7 +58,7 @@ class JobQueue extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'call' => array(self::BELONGS_TO, 'JobQueue', 'call_id')
+		    	'call' => array(self::BELONGS_TO, 'JobQueue', 'call_id')
 		);
 	}
 

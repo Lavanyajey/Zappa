@@ -20,14 +20,13 @@ $config = array(
 		'application.models.*',
 		'application.components.*',
 		'application.widgets.*'
-        //'application.extensions.ManyToManyBehavior',        
 	),
 
 	'defaultController'=>'site/intro',
 	
 	'modules'=>array(
 		'user'=>array(
-            'returnUrl' => array('/activities')
+            'returnUrl' => array('/')
         )
 	),
 
@@ -53,13 +52,18 @@ $config = array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
+				'user/<action:\w+>'=>'user/user/<action>',
+				'login'=>'user/user/login',
+				'logout'=>'user/user/logout'
+				
+				/*
 				'post/<id:\d+>/<title:.*?>'=>'post/view',
 				'posts/<tag:.*?>'=>'post/index',
 				'activities'=>'activity/index',
 				'activities/statistics'=>'activity/statistics',
-				'user/<action:\w+>'=>'user/user/<action>',
 				'login'=>'user/user/login',
 				'logout'=>'user/user/logout'
+				*/
             ),
         ),
 		'errorHandler'=>array(
@@ -88,7 +92,7 @@ $config = array(
 				'profile'=>array('/user/profile')
 	        ),
 		),
-		'gii'=>array(
+		'gii' => array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'enter',
 		)

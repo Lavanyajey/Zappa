@@ -49,7 +49,7 @@ $config = array(
 			'enableParamLogging'=>true
 		),
 		'urlManager'=>array(
-			'urlFormat'=>'path',
+			//'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
 				'user/<action:\w+>'=>'user/user/<action>',

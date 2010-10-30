@@ -48,7 +48,7 @@ Yii::app()->clientScript->scriptMap = array(
 		<?php endif; ?>
 		
 		<div id="logo">
-			<a href="<?php echo $this->createAbsoluteUrl('/'); ?>">Zappa</a>
+			Zappa
 		</div>
 		
 	</div><!-- topbar -->

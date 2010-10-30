@@ -95,6 +95,7 @@ $config = array(
 		'gii' => array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'enter',
+			'ipFilters'=>array('*')
 		)
 	),
 

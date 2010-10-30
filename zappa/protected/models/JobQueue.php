@@ -15,6 +15,8 @@
  */
 class JobQueue extends CActiveRecord
 {
+	public $_message = '';
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return JobQueue the static model class
@@ -40,8 +42,8 @@ class JobQueue extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('phone', 'required'),
-			array('phone', 'numerical', 'integerOnly'=>true),
+			array('phone, _message', 'required'),
+			//array('numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, call_id, phone, time', 'safe', 'on'=>'search'),
@@ -56,7 +58,7 @@ class JobQueue extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'call' => array(self::BELONGS_TO, 'JobQueue', 'call_id')
+		    	'call' => array(self::BELONGS_TO, 'JobQueue', 'call_id')
 		);
 	}
 

@@ -6,7 +6,7 @@ class CallController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='/layouts/main';
 
 	/**
 	 * @return array action filters
@@ -27,7 +27,7 @@ class CallController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','get'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -69,15 +69,12 @@ class CallController extends Controller
 
 		if(isset($_POST['JobQueue']))
 		{
-                    // $callModel->attributes;
-                    $callModel->message = "Wake up bitch! It's 7:30!";
-                    $callModel->save();
-                    Yii::log($callModel->id);
-                    $jobQueueModel->attributes=$_POST['JobQueue'];
-
-                    $jobQueueModel->call_id = $callModel->id;
-                    if($jobQueueModel->save())
-                       $this->redirect(array('view','id'=>$jobQueueModel->id));
+			$jobQueueModel->attributes=$_POST['JobQueue'];
+			$callModel->message = $jobQueueModel->_message;
+			$callModel->save();
+			$jobQueueModel->call_id = $callModel->id;
+			if($jobQueueModel->save())
+				$this->redirect(array('view','id'=>$jobQueueModel->id));
 		}
 
 		$this->render('create',array(
@@ -139,6 +136,22 @@ class CallController extends Controller
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+        /**
+         * Get a call in XML Format
+         */
+        public function actionGet($id)
+        {
+          $model = Calls::model()->findByPk((int)$id);
+          $message = $model->message;
+          Yii::log($message);
+
+          $this->renderPartial('get',array(
+			'message'=>$message,
+          ));
+
+          //Calls::model()->findByPk((int)$id)->delete();
+        }
 
 	/**
 	 * Manages all models.

@@ -49,7 +49,7 @@ $config = array(
 			'enableParamLogging'=>true
 		),
 		'urlManager'=>array(
-			'urlFormat'=>'path',
+			//'urlFormat'=>'path',
 			'showScriptName'=>false,
 			'rules'=>array(
 				'user/<action:\w+>'=>'user/user/<action>',
@@ -113,11 +113,11 @@ $config['components']['log'] = array(
 				'levels'=>'error, warning',                  
 			),
 			// uncomment the following to show log messages on web pages
-			
+			/*
 			array(
 				'class'=>'CWebLogRoute',
 				'categories'=>'application, system.db.*'
-			),
+      ),*/
 			array(
 				'class' => 'ext.shiki.firePHPLogRoute.ShikiFirePHPLogRoute',
 				'fbPath' => 'ext.shiki.firePHPLogRoute.FirePHPCore.fb',

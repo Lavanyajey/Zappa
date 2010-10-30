@@ -146,11 +146,11 @@ class CallController extends Controller
           $message = $model->message;
           Yii::log($message);
 
-          $this->render('get',array(
+          $this->renderPartial('get',array(
 			'message'=>$message,
           ));
 
-          Calls::model()->findByPk((int)$id)->delete();
+          //Calls::model()->findByPk((int)$id)->delete();
         }
 
 	/**

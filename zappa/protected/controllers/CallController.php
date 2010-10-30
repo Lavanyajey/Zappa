@@ -150,7 +150,7 @@ class CallController extends Controller
 			'message'=>$message,
           ));
 
-          Calls::model()->findByPk((int)$id)->delete();
+          //Calls::model()->findByPk((int)$id)->delete();
         }
 
 	/**

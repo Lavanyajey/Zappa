@@ -145,13 +145,15 @@ class CallController extends Controller
          */
         public function actionGet($id)
         {
-          $model = Calls::model()->findByPk((int)$id);;
+          $model = Calls::model()->findByPk((int)$id);
           $message = $model->message;
           Yii::log($message);
 
           $this->render('get',array(
 			'message'=>$message,
           ));
+
+          Calls::model()->findByPk((int)$id)->delete();
         }
 
 	/**

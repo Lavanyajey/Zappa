@@ -43,7 +43,7 @@ class JobQueue extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('phone, _message', 'required'),
-			array('numerical', 'integerOnly'=>true),
+			//array('numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, call_id, phone, time', 'safe', 'on'=>'search'),

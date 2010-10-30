@@ -1,7 +1,5 @@
 .DS_Store
 nbproject/*
-zappa/protected/config
-zappa/protected/config/*
 zappa/protected/runtime
 zappa/protected/runtime/*
 zappa/assets

@@ -1,0 +1,17 @@
+<project name="ailp" default="compile" basedir=".">
+	<description>
+		Call ME Alert Build Script
+	</description>
+<property name="build" location="build"/>
+
+<property name="twilioSrc" location="twillioAPI/src/com/twilio/sdk/"/>
+<property name="CallMeAlert" location="CallMeAlert/src/uk/ac/ed/l48/callmealert"/>
+<property name="commonsJar2" location="jars/commons-codec-1.3.jar"/>
+
+<target name="compile" description="compile the source">
+	<javac srcdir="${build}:${twilioSrc}:${CallMeAlert}" 
+		classpath="${commonsJar2}" destdir="${build}"/>
+</target>
+
+</project>
+

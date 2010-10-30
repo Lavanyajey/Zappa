@@ -73,10 +73,10 @@ return array(
 					'levels'=>'error, warning',                  
 				),
 				// uncomment the following to show log messages on web pages
-				array(
-					'class'=>'CWebLogRoute',
-					'categories'=>'application, system.db.*'
-				),
+				//array(
+				//	'class'=>'CWebLogRoute',
+				//	'categories'=>'application, system.db.*'
+				//),
 				array(
 					'class' => 'ext.shiki.firePHPLogRoute.ShikiFirePHPLogRoute',
 					'fbPath' => 'ext.shiki.firePHPLogRoute.FirePHPCore.fb',

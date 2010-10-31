@@ -21,11 +21,6 @@ $this->pageTitle = $this->contentTitle = Yii::t("UserModule.user", "Registration
 	</div>
 	
 	<div class="row">
-	<?php echo CHtml::activeLabel($form,'phone'); ?>
-	<?php echo CHtml::activeTextField($form, 'phone'); ?>
-	</div>
-	
-	<div class="row">
 	<?php echo CHtml::activeLabel($form,'password', array('label'=>'Create a password')); ?>
 	<?php echo CHtml::activePasswordField($form,'password', array('autocomplete'=>'off')); ?>
 	<?php echo CHtml::label(Yii::t('UserModule.user', 'Show password'), 'showpassword', array('id'=>'label_showpassword')); ?>

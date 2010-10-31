@@ -116,28 +116,36 @@ class CallController extends Controller
         ));
 		
 		$jobQueueModel = new JobQueue;
-        $callModel = new Calls;
-		
-		if(isset($_POST['JobQueue'])) {
-			$jobQueueModel->attributes=$_POST['JobQueue'];
-			if ($jobQueueModel->validate()) {
-				$callModel->message = $jobQueueModel->_message;
-				$callModel->user_id = Yii::app()->user->id;
-				if ($callModel->validate()) {
-					$callModel->save();
-					$jobQueueModel->call_id = $callModel->id;
-					if ($jobQueueModel->save()) {
-						$this->redirect(array('index'));
-					} else {
-						throw new CHttpException(400,'Oops. Fail whale.');
-					}
-				}
+    $callModel = new Calls;
+
+    $callModel->message = "Good morning. This is your wake up call!";
+    $callModel->closing_message = "Have a great day!";
+
+    if(isset($_POST['JobQueue'])) {
+      if(isset($_POST['Calls'])) {
+        $jobQueueModel->attributes=$_POST['JobQueue'];
+        $callModel->attributes=$_POST['Calls'];
+
+        if ($jobQueueModel->validate()) {
+          $callModel->user_id = Yii::app()->user->id;
+          if ($callModel->validate()) {
+            $callModel->status = 0;
+            $callModel->save();
+            $jobQueueModel->call_id = $callModel->id;
+            if ($jobQueueModel->save()) {
+              $this->redirect(array('index'));
+            } else {
+              throw new CHttpException(400,'Oops. Fail whale.');
+            }
+          }
+        }
 			}
 		}
 		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-			'model'=>$jobQueueModel,
+      'model'=>$jobQueueModel,
+      'call'=>$callModel,
 		));
 	}
 

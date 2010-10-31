@@ -1,7 +1,7 @@
 <div id="createAlert">
 <h1>Create an Alert</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'call'=>$call)); ?>
 </div>
 
 <div id="alertSchedule">

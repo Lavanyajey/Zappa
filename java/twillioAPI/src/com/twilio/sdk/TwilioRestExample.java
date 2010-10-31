@@ -35,73 +35,7 @@ public class TwilioRestExample {
     /* Twilio REST API version */
     public static final String APIVERSION = "2010-04-01";
     
-    public static void main(String[] args){
-
-        /* Twilio AccountSid and AuthToken */
-        String AccountSid = "AC56723c8d36b0959f97ec6c4fd98173cd";
-        String AuthToken = "29be9da2bff9ca19fced086e64bc395a";
-        
-        /* Outgoing Caller ID previously validated with Twilio */
-        String CallerID = "7732432694";
-        
-        /* Instantiate a new Twilio Rest Client */
-        TwilioRestClient client = new TwilioRestClient(AccountSid, AuthToken, null);
-        
-        /*  
-         * Initiate a new outbound call
-         *         Is a POST to the Calls resource
-         *         Returns a TwilioRestResponse object 
-         */ 
-	System.out.println("Please enter a number (in format +44 ...");
-	String number = "";
-	try {
-		InputStreamReader input = new InputStreamReader(System.in);
-		BufferedReader reader = new BufferedReader(input);
-		number = reader.readLine();
-	} 
-	catch (Exception e)
-	{
-		System.out.println(e);
-	}
-        makeCallExample(client, CallerID, number, "http://demo.twilio.com/welcome");
-
-        System.out.println("========================================");
-        
-        /* 
-         * get list of past calls 
-         *   is a GET to the Calls resources
-         */
-        getCallsExample(client);
-        
-        System.out.println("========================================");
-        
-        /* 
-         * get recent developer notifications 
-         * is a GET to the Notifications resource
-         */
-        getNotificationsExample(client);
-
-        System.out.println("========================================");
-
-        /*
-         * get the recording for call
-         * is a GET to the Recordings resource 
-         * with a parameter CallSid to filter results for recordings 
-         * on that call object
-         */
-        getRecordingsExample( client,   "CA123456789012345678901234567890AF");
-    
-        System.out.println("========================================");
-        
-        /* 
-         * delete a specific recording 
-         *     is a DELETE to the Recordings resource
-         */
-        deleteRecordingsExample( client,  "RC123456789012345678901234567890AF");
-    
-    }
-    
-    /**
+   /**
      * Example of making an outgoing call.
      * 
      * @param client authenticated twilio client object

@@ -16,7 +16,3 @@
 </div>
 
 <div class="clearfloats"></div>
-
-<div style="text-align:right;">
-	<h2>Your phone number is <?php echo Yii::app()->user->getInstance()->phone; ?></h2>
-</div>

@@ -133,8 +133,6 @@ class CallController extends Controller
 					}
 				}
 			}
-		} else {
-			$jobQueueModel->phone = Yii::app()->user->getInstance()->phone;
 		}
 		
 		$this->render('index',array(

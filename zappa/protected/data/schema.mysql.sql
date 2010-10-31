@@ -28,6 +28,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `tbl_calls` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
+  `zipcode` varchar(10) COLLATE utf8_unicode_ci,
+  `news` boolean NOT NULL,
+  `joke` boolean NOT NULL,
+  `closing message` text COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)

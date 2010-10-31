@@ -48,11 +48,7 @@ Yii::app()->clientScript->scriptMap = array(
 			?>
 		</div><!-- mainmenu -->
 		<?php endif; ?>
-		
-		<div id="logo">
-			Zappa
-		</div>
-		
+				
 	</div><!-- topbar -->
 	
 	
@@ -68,11 +64,9 @@ Yii::app()->clientScript->scriptMap = array(
 </div>
     
 <div id="footer">
-	
 	<div id="copyright">
 		Copyright &copy; <?php echo date('Y'); ?> by Zappa Team. All Rights Reserved. <?php echo Yii::powered(); ?>
 	</div><!-- copyright -->
-		
 </div><!-- footer -->
 
 <script type="text/javascript">

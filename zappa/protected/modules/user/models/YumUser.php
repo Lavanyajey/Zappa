@@ -69,7 +69,6 @@ class YumUser extends YumActiveRecord
 			array('password', 'required', 'on'=>array('insert', 'edit', 'admin', 'registration')),
 			array('createtime, lastvisit, superuser, status', 'numerical', 'integerOnly'=>true),
 			//array('timezone_id', 'required'),
-			array('phone', 'required', 'on'=>array('insert', 'edit', 'admin', 'registration')),
 			array('timezone_id', 'numerical', 'min'=>1, 'max'=>75, 'on'=>'edit, admin, registration'),
 			//array('new_email', 'safe', 'on'=>'edit'),
 		);
@@ -81,13 +80,12 @@ class YumUser extends YumActiveRecord
 		);
 	}
 
-	public function register($email=null, $password=null, $phone=null) {
+	public function register($email=null, $password=null) {
 		#this function can be used external to
-		if($email!==null && $password!==null && $phone!==null) {
+		if($email!==null && $password!==null) {
 			$this->email = $email;
 			$this->password = $this->encrypt($password);
 			$this->timezone_id = 27; //London
-			$this->phone = $phone;
 		}
 		$this->activationKey = $this->generateActivationKey(false,$password);
 		$this->createtime = time();
@@ -122,7 +120,7 @@ class YumUser extends YumActiveRecord
 	}
 	
 	/**
-	 * @params boolean $activate Whether to generate activation key when user is registering first time (false)
+	 * @params boolean $activate Whether to generate activation key when user is fing first time (false)
 	 * or when it is activating (true)
 	 * @params string $password password entered by user	
 	 * @param array $params, optional, to allow passing values outside class in inherited classes

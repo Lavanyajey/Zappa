@@ -7,7 +7,59 @@ class CallController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='/layouts/main';
-
+  
+  public $jokes = array(
+    '1' => array(
+      '1' =>'A Horse goes into a bar and the bartender says "Hey buddy, Why the Long Face"',
+      '2' =>' Where do you find a one legged dog?  Where you left it.',
+      '3' =>'What do you get when you cross a vampire and a snowman? Frostbite.',
+      '4' =>'Why did the vampire go to the orthodontist? To improve his bite.',
+      '5' =>'1e',
+    ),
+    '2' => array(
+      '1' =>'',
+      '2' =>'',
+      '3' =>'',
+      '4' =>'',
+      '5' =>'',
+    ),
+    '3' => array(
+      '1' =>'',
+      '2' =>'',
+      '3' =>'',
+      '4' =>'',
+      '5' =>'',
+    ),
+    '4' => array(
+      '1' =>'',
+      '2' =>'',
+      '3' =>'',
+      '4' =>'',
+      '5' =>'',
+    ),
+    '5' => array(
+      '1' =>'',
+      '2' =>'',
+      '3' =>'',
+      '4' =>'',
+      '5' =>'',
+    ),
+    '6' => array(
+      '1' =>'',
+      '2' =>'',
+      '3' =>'',
+      '4' =>'',
+      '5' =>'',
+    ),
+    '7' => array(
+      '1' =>'7a',
+      '2' =>'7b',
+      '3' =>'7c',
+      '4' =>'7d',
+      '5' =>'7e',
+    ),
+  );
+  
 	/**
 	 * @return array action filters
 	 */
@@ -27,7 +79,7 @@ class CallController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('get'),
+				'actions'=>array('get', 'weather'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -142,19 +194,23 @@ class CallController extends Controller
 			'model'=>$jobQueueModel,
 		));
 	}
-
-        /**
+         /**
          * Get a call in XML Format
          */
     public function actionGet($id)
 	{
 		$model = Calls::model()->findByPk((int)$id);
 		$message = $model->message;
+    $postcode = $model->zipcode;
+    $closing = $model['closing message'];
 		$model->status=1;
 		$model->save();
-	
+    $weather = $this->basicWeather($postcode);
+    print_r($this->jokes[date('N')][rand(1,5)]);
 		$this->renderPartial('get',array(
 		  'message'=>$message,
+      'weather'=>$weather,
+      'closing'=>$closing,
 		));
     }
 
@@ -198,4 +254,72 @@ class CallController extends Controller
 			Yii::app()->end();
 		}
 	}
+  
+function FtoC($fah) {
+  return round(($fah - 32)*5/9);
+}  
+  
+  
+  function getWeather($postCode) {
+
+
+
+$requestAddress = "http://www.google.com/ig/api?weather=".$postCode;
+
+$xml_str = file_get_contents($requestAddress,0);
+
+$xml = new SimplexmlElement($xml_str);
+    
+    foreach($xml->weather as $item) {
+        $location = $item->forecast_information->city['data'];
+        if(isset($location)) {
+          $today = array(
+            'condition' => $item->current_conditions->condition['data'],
+            'temp' => $this->FtoC($item->current_conditions->temp_f['data']),
+            'humidity' => $item->current_conditions->humidity['data'],
+            'wind' => $item->current_conditions->wind_condition['data'],
+            'date' => $item->forecast_information->forecast_date['data'],
+            'icon' => $item->current_conditions->icon['data'],
+          );
+          $count = 0;
+          $future = array();
+          foreach($item->forecast_conditions as $new) {
+              $future[$count] = array(
+                'dayOfWeek' => $new->day_of_week['data'],
+                'lowTemp' => $this->FtoC($new->low['data']),
+                'highTemp' => $this->FtoC($new->high['data']),
+                'condition' => $new->condition['data'],
+                'icon' => $new->icon['data'],
+              );
+              $count++;
+              
+          }
+        }
+    }
+return array($location, $today, $future);
+}
+  
+  function basicWeather($postcode) {
+  $val = $this->getWeather($postcode);
+  $location = $val['0'];
+  $today = $val['1'];
+  $ret;
+  if(isset($location)) {
+    $ret = 'Today in '. $location .' the weather condition is: '. $today['condition'].' with temperatures around '.$today['temp'].' degrees Celsius and '.$today['humidity'];
+  }  
+  else
+    $ret = '';
+    return $ret;
+}
+  
+  function validLocation($postcode) {
+    $val = $this->getWeather($postcode);
+    if(isset($val['0']))
+      return true;
+    return false;
+  }
+  
+  public function actionWeather($postcode) {
+    echo $this->basicWeather($postcode);
+  }
 }

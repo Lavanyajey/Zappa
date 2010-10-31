@@ -2,7 +2,7 @@
 
 class SiteController extends Controller
 {
-	public $layout='main';
+	public $layout='_inside';
 
 	/**
 	 * Declares class-based actions.
@@ -19,11 +19,10 @@ class SiteController extends Controller
 	}
 	
 	public function actionIntro() {
-		//$this->layout = '_homepage';
 		if (!Yii::app()->user->isGuest) {
 			$this->redirect(array('call/index'));
         }
-		$this->render('intro');
+		$this->render('application.views.layouts._homepage');
 	}
 
 	/**

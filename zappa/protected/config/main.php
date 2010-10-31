@@ -88,7 +88,7 @@ return array(
 	
 	'modules'=>array(
 		'user' => array(
-			'layout' => 'application.views.layouts.main',
+			'layout' => 'application.views.layouts._inside',
 			'enableEmailActivation' => false,
 			'allowInactiveAcctLogin' => true,
 			'allowCaptcha' => false,

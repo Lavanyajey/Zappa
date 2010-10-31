@@ -29,45 +29,8 @@ Yii::app()->clientScript->scriptMap = array(
 ?>
 </head>
 <body>
-
-<div class="white">
-<div class="container">
-
-	<div id="topbar">
-		<?php if (!Yii::app()->user->isGuest): ?>
-		<div class="mainmenu">
-			<?php
-				$username = Yii::app()->user->instance->email;
-				$this->widget('zii.widgets.CMenu',array(
-					'items'=>array(
-						array('label'=>$username),
-						array('label' => ' | '),
-						array('url'=>Yii::app()->getModule('user')->logoutUrl, 'label'=>Yii::t('global', 'Logout'))
-					),
-				));
-			?>
-		</div><!-- mainmenu -->
-		<?php endif; ?>
-				
-	</div><!-- topbar -->
 	
-	
-    <div id="content">
-		<div id="secondaryContainer">
-			<div class="bg">
-				<?php echo $content; ?>
-			</div>
-		</div>
-    </div>
-    
-</div><!-- page -->
-</div>
-    
-<div id="footer">
-	<div id="copyright">
-		Copyright &copy; <?php echo date('Y'); ?> by Zappa Team. All Rights Reserved. <?php echo Yii::powered(); ?>
-	</div><!-- copyright -->
-</div><!-- footer -->
+	<?php echo $content; ?>
 
 <script type="text/javascript">
 	Zappa.visuals();

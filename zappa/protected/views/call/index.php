@@ -1,7 +1,7 @@
 <div id="createAlert">
 <h1>Create an Alert</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'call'=>$call)); ?>
 </div>
 
 <div id="alertSchedule">
@@ -16,7 +16,3 @@
 </div>
 
 <div class="clearfloats"></div>
-
-<div style="text-align:right;">
-	<h2>Your phone number is <?php echo Yii::app()->user->getInstance()->phone; ?></h2>
-</div>

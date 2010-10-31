@@ -36,7 +36,7 @@ class Calls extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('message, user_id', 'required'),
+			array('message, user_id, zipcode, news, joke, closing_message', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, message, user_id, status', 'safe', 'on'=>'search'),

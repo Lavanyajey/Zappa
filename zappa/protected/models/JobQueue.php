@@ -15,7 +15,7 @@
  */
 class JobQueue extends CActiveRecord
 {
-	public $_message = '';
+  public $timezone_id = '';
 	
 	/**
 	 * Returns the static model of the specified AR class.
@@ -42,7 +42,7 @@ class JobQueue extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('phone, _message', 'required'),
+			array('phone, timezone_id', 'required'),
 			array('time', 'validateTime'),
 			array('id, call_id, phone, time', 'safe', 'on'=>'search'),
 		);
@@ -54,7 +54,8 @@ class JobQueue extends CActiveRecord
 	public function relations()
 	{
 		return array(
-			'call' => array(self::BELONGS_TO, 'Calls', 'call_id')
+			'call' => array(self::BELONGS_TO, 'Calls', 'call_id'),
+			'timezone' => array(self::BELONGS_TO, 'Timezones', 'timezone_id')
 		);
 	}
 

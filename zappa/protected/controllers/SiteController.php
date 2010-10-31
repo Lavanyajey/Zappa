@@ -19,6 +19,7 @@ class SiteController extends Controller
 	}
 	
 	public function actionIntro() {
+		//$this->layout = '_homepage';
 		if (!Yii::app()->user->isGuest) {
 			$this->redirect(array('call/index'));
         }

@@ -118,7 +118,7 @@ div.form .errorMessage { position:absolute; }
 #alertSchedule .list {
 	
 }
-
+/*
 #createAlert input[type="text"] {
 	font-size:24px;
 	width:220px;
@@ -131,3 +131,4 @@ div.form .errorMessage { position:absolute; }
 #JobQueue_phone { text-align:center; }
 #JobQueue_time { text-align:center; }
 #JobQueue__message { width: 224px; }
+*/

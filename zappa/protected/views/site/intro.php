@@ -7,7 +7,7 @@
 	
 	<div class="left">
 		<div class="buttonContainer">
-			<a href="<?php echo CHtml::normalizeUrl(array('/user/registration')); ?>" class="awesomeButton registerButton">Register</a>
+			<a href="<?php echo CHtml::normalizeUrl(array('/user/user/registration')); ?>" class="awesomeButton registerButton">Register</a>
 		</div>
 		
 		<div class="descriptionContainer">

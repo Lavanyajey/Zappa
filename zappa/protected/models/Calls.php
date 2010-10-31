@@ -36,10 +36,10 @@ class Calls extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('message', 'required'),
+			array('message, user_id', 'required'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, message', 'safe', 'on'=>'search'),
+			array('id, message, user_id, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +51,7 @@ class Calls extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'user_id' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 

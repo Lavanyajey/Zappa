@@ -21,8 +21,8 @@ $this->pageTitle = $this->contentTitle = Yii::t("UserModule.user", "Registration
 	</div>
 	
 	<div class="row">
-	<?php echo CHtml::activeLabel($form,'timezone_id'); ?>
-	<?php echo CHtml::activeDropDownList($form, 'timezone_id', CHtml::listData(Timezone::model()->findAll(), 'id', 'label'), array('empty'=>'')); ?>
+	<?php echo CHtml::activeLabel($form,'phone'); ?>
+	<?php echo CHtml::activeTextField($form, 'phone'); ?>
 	</div>
 	
 	<div class="row">

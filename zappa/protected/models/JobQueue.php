@@ -43,9 +43,7 @@ class JobQueue extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('phone, _message', 'required'),
-			//array('numerical', 'integerOnly'=>true),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
+			array('time', 'validateTime'),
 			array('id, call_id, phone, time', 'safe', 'on'=>'search'),
 		);
 	}
@@ -55,10 +53,8 @@ class JobQueue extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
-		    	'call' => array(self::BELONGS_TO, 'JobQueue', 'call_id')
+			'call' => array(self::BELONGS_TO, 'Calls', 'call_id')
 		);
 	}
 
@@ -94,5 +90,37 @@ class JobQueue extends CActiveRecord
 		return new CActiveDataProvider(get_class($this), array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function beforeSave() {
+		parent::beforeSave();
+		//$this->time = strtotime($this->time);
+		$this->time = date('Y-m-d H:i:s', strtotime($this->time));
+		return true;
+	}
+	
+	public function validateTime($attribute, $params) {
+		if (empty($this->time)) {
+			$this->addError('time', 'Time cannot be blank');
+			return false;
+		}
+		
+		$now = time();
+		$timestamp = strtotime($this->time);
+		
+		if (!$timestamp) {
+			$this->addError('time', 'Invalid time');
+			return false;
+		}
+		
+		if ($timestamp > $now && $timestamp<($now+3*60)) {
+			$this->addError('time', 'Time should be at least 3 minutes from now');
+			return false;
+		}
+		
+		if ($timestamp<$now) {
+			$this->addError('time', 'You should provide a future time');
+			return false;
+		}
 	}
 }

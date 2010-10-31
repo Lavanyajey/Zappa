@@ -20,7 +20,7 @@ class SiteController extends Controller
 	
 	public function actionIntro() {
 		if (!Yii::app()->user->isGuest) {
-			$this->redirect('call/create');
+			$this->redirect(array('call/index'));
         }
 		$this->render('intro');
 	}

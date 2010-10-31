@@ -47,7 +47,8 @@ class YumUserController extends YumController
 	activation email will be sent to the user.
 	*/
 	public function actionRegistration() {
-		$form = new YumUser;
+		
+		$form = new YumUser('registration');
 		// User is already logged in?
 		if (($uid = Yii::app()->user->id) === true) {
 			$this->redirect(Yii::app()->homeUrl);
@@ -56,7 +57,7 @@ class YumUserController extends YumController
 				$form->attributes = $_POST['YumUser'];
 				if($form->validate()) {
 					$user = new YumUser();
-					if ($user->register($form->email, $form->password, $form->timezone_id)) {
+					if ($user->register($form->email, $form->password, $form->phone)) {
 						if(UserModule::module()->enableEmailActivation) {
 							$this->sendActivationEmail($user);
 						} else {
